@@ -1,0 +1,109 @@
+#include "UI.hpp"
+#include "Constants.hpp"
+#include <iostream>
+
+
+bool UI::loadFont(const std::string& path){ 
+
+    if (!font.loadFromFile(path)) {
+        std::cerr << "Font not found in current working directory" << std::endl;
+        return false;
+    }
+    livesText.setFont(font);
+    livesText.setFillColor(sf::Color::Red);
+    livesText.setCharacterSize(50);
+    livesText.setPosition(10, 10);
+
+    scoreText.setFont(font);
+    scoreText.setFillColor(sf::Color::Green);
+    scoreText.setCharacterSize(50);
+    scoreText.setPosition(10, 70);
+
+    wavesText.setFont(font);
+    wavesText.setFillColor(sf::Color::Cyan);
+    wavesText.setCharacterSize(50);
+    wavesText.setPosition(Constants::SCREEN_WIDTH - 180,
+                          Constants::SCREEN_HEIGHT - 1050);
+
+    levelText.setFont(font);
+    levelText.setFillColor(sf::Color::Red);
+    levelText.setCharacterSize(100);
+    levelText.setPosition(Constants::SCREEN_WIDTH / 2,
+                          Constants::SCREEN_HEIGHT / 2);
+
+    gameOverText0.setFont(font);
+    gameOverText0.setFillColor(sf::Color::Red);
+    gameOverText0.setCharacterSize(200);
+    gameOverText0.setString("GAME OVER!");
+
+    sf::FloatRect textRect0 = gameOverText0.getLocalBounds();
+    gameOverText0.setOrigin(textRect0.left + textRect0.width / 2.0f, 
+                            textRect0.top + textRect0.height / 2.0f);
+    gameOverText0.setPosition(Constants::SCREEN_WIDTH / 2.0f,
+                             (Constants::SCREEN_HEIGHT / 2.0f) - 30);
+
+    gameOverText.setFont(font);
+    gameOverText.setFillColor(sf::Color::Magenta);
+    gameOverText.setCharacterSize(70);
+    gameOverText.setString("PRESS R TO RESTART\nPRESS Q TO QUIT");
+
+
+    sf::FloatRect textRect = gameOverText.getLocalBounds();
+    gameOverText.setOrigin(textRect.left + textRect.width / 2.0f,
+                           textRect.top + textRect.height / 2.0f);
+    gameOverText.setPosition(Constants::SCREEN_WIDTH / 2.0f,
+                            (Constants::SCREEN_HEIGHT / 2.0f) + 350);
+
+
+    pausedText.setFont(font);
+    pausedText.setCharacterSize(80);
+    pausedText.setFillColor(sf::Color::Magenta);
+    pausedText.setString("PAUSED");
+    
+     sf::FloatRect textRectPaused = pausedText.getLocalBounds();
+    pausedText.setOrigin(textRectPaused.left + textRectPaused.width / 2.0f, 
+                            textRectPaused.top + textRectPaused.height / 2.0f);
+    pausedText.setPosition(Constants::SCREEN_WIDTH / 2.0f,
+                              (Constants::SCREEN_HEIGHT / 2.0f) - 30);
+
+    return true;
+}
+
+void UI::draw(sf::RenderWindow& window,
+              int lives, int score, int waveNumber,
+              GameState state) 
+{
+    livesText.setString("Lives:   " + std::to_string(lives));
+    scoreText.setString("Score:   " + std::to_string(score));
+    wavesText.setString("Wave:    " + std::to_string(waveNumber));
+
+    if (state == GameState::PLAYING) {
+        window.draw(livesText);
+        window.draw(scoreText);
+        window.draw(wavesText);
+    }
+
+    else if (state == GameState::PAUSED) {
+        window.draw(livesText);
+        window.draw(scoreText);
+        window.draw(wavesText);
+        window.draw(pausedText);
+        window.draw(gameOverText);
+    } 
+
+    else if (state == GameState::SHOWING_WAVE) {
+        window.draw(levelText);
+    }
+
+    else if (state == GameState::GAME_OVER) {
+        window.draw(gameOverText0);
+        window.draw(gameOverText);
+    }
+}
+
+void UI::setWaveNumber(int waveNumber) {
+    levelText.setString("Wave:   " + std::to_string(waveNumber));
+    sf::FloatRect bounds = levelText.getLocalBounds();
+    levelText.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2);
+    levelText.setPosition(Constants::SCREEN_WIDTH / 2, Constants::SCREEN_HEIGHT / 2);
+}
