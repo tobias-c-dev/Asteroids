@@ -4,12 +4,12 @@
 namespace Constants {
 
     // Window
-    inline int SCREEN_WIDTH = 800.0f;
-    inline int SCREEN_HEIGHT = 600.0f;
+    constexpr inline float SCREEN_WIDTH = 800.0f;
+    constexpr inline float SCREEN_HEIGHT = 600.0f;
 
     // Math
     constexpr float PI = 3.14159265358979323846f;
-    inline float degToRad(float degrees) {return degrees * PI / 180.0f; }
+    constexpr inline float degToRad(float degrees) {return degrees * PI / 180.0f; }
 
     // Ship
     constexpr float SHIP_SIZE = 60.f;
@@ -25,7 +25,7 @@ namespace Constants {
 
     // Asteroids
     constexpr float ASTEROID_MIN_RADIUS = 40.0f;
-    constexpr float ASTEROID_START_COUNT = 3.0f;
+    constexpr int ASTEROID_START_COUNT = 3;
     constexpr float ASTEROID_MIN_SCALE = 0.5f;
 
     // Game Rules
