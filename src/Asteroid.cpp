@@ -4,7 +4,6 @@
 
 sf::Texture Asteroid::texture;
 
-// definition: signature must exactly match the header
 Asteroid::Asteroid(float scale, const sf::Vector2f& position, const sf::Vector2f& velocity)
     : velocity(velocity), scale(scale)
 {
