@@ -13,17 +13,21 @@ add_executable(Asteroids
     src/UI.cpp
 )
 
-# copy assets to the binary dir so runtime can find them
-file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+target_include_directories(Asteroids PRIVATE
+    ${CMAKE_SOURCE_DIR}/include
+)
 
-target_include_directories(Asteroids PRIVATE ${CMAKE_SOURCE_DIR}/include)
+# Copy assets next to the executable
+file(COPY
+    ${CMAKE_SOURCE_DIR}/assets
+    DESTINATION ${CMAKE_BINARY_DIR}
+)
 
-# Try to find SFML using imported targets if available
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+# SFML 3
+find_package(SFML 3 REQUIRED COMPONENTS Graphics Window System)
 
-# If SFML provides namespaced targets (sfml::graphics), prefer them. Fallback to plain names if needed.
-if(TARGET sfml::graphics)
-    target_link_libraries(Asteroids PRIVATE sfml::graphics sfml::window sfml::system)
-else()
-    target_link_libraries(Asteroids PRIVATE sfml-graphics sfml-window sfml-system)
-endif()
+target_link_libraries(Asteroids PRIVATE
+    SFML::Graphics
+    SFML::Window
+    SFML::System
+)

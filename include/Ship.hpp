@@ -1,9 +1,12 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include <vector>
+
 #include "Bullet.hpp"
 
-class Ship {
+class Ship
+{
 public:
     Ship();
 
@@ -19,7 +22,8 @@ public:
     sf::Vector2f getPosition() const;
 
 private:
-    // sprite & texture for pixel-art ship
+    // Texture must be declared before Sprite because
+    // Sprite requires the texture during construction.
     sf::Texture texture;
     sf::Sprite sprite;
 

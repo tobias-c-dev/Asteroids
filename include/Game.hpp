@@ -1,47 +1,51 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include <vector>
+
 #include "Asteroid.hpp"
 #include "Bullet.hpp"
 #include "Constants.hpp"
 #include "Ship.hpp"
 #include "UI.hpp"
 
-class Game {
-    public:
-        Game();
-        void run();
-    
-    private:
-        void processEvents();
-        void update(float dt);
-        void render();
+class Game
+{
+public:
+    Game();
 
-        void handleCollisions();
-        void resetGame();
-        void spawnAsteroids(int count, float speedMult);
+    void run();
 
-        sf::RenderWindow window;
-        GameState state;
+private:
+    void processEvents();
+    void update(float dt);
+    void render();
 
-        Ship ship;
-        std::vector<Asteroid> asteroids;
-        std::vector<Bullet> bullets;
+    void handleCollisions();
+    void resetGame();
+    void spawnAsteroids(int count, float speedMult);
 
-        int score;
-        int lives;
-        int waveNumber;
+    sf::RenderWindow window;
 
-        // UI
-        UI ui;
+    GameState state;
 
-        // Timers
-        sf::Clock clock;
-        sf::Clock invincibilityClock;
-        sf::Clock gameOverClock;
-        sf::Clock waveClock;
+    Ship ship;
+    std::vector<Asteroid> asteroids;
+    std::vector<Bullet> bullets;
 
-        // Flags
-        bool isInvincible;
-        bool canControlShip;
+    int score;
+    int lives;
+    int waveNumber;
+
+    UI ui;
+
+    // Timers
+    sf::Clock clock;
+    sf::Clock invincibilityClock;
+    sf::Clock gameOverClock;
+    sf::Clock waveClock;
+
+    // Flags
+    bool isInvincible;
+    bool canControlShip;
 };

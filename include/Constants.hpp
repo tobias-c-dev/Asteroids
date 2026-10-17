@@ -1,14 +1,18 @@
 #pragma once
 
-namespace Constants {
-
+namespace Constants
+{
     // Window
-    constexpr inline float SCREEN_WIDTH = 800.0f;
-    constexpr inline float SCREEN_HEIGHT = 600.0f;
+    inline float SCREEN_WIDTH = 800.0f;
+    inline float SCREEN_HEIGHT = 600.0f;
 
     // Math
     constexpr float PI = 3.14159265358979323846f;
-    constexpr inline float degToRad(float degrees) {return degrees * PI / 180.0f; }
+
+    constexpr inline float degToRad(float degrees)
+    {
+        return degrees * PI / 180.0f;
+    }
 
     // Ship
     constexpr float SHIP_SIZE = 60.f;
@@ -33,4 +37,10 @@ namespace Constants {
     constexpr float CONTROL_DELAY = 1.0f;
 }
 
-enum class GameState {PLAYING, PAUSED, GAME_OVER, SHOWING_WAVE};
+enum class GameState
+{
+    PLAYING,
+    PAUSED,
+    GAME_OVER,
+    SHOWING_WAVE
+};
