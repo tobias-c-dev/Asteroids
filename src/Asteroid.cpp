@@ -7,7 +7,9 @@ sf::Texture Asteroid::texture;
 Asteroid::Asteroid(float scale,
                    const sf::Vector2f& position,
                    const sf::Vector2f& velocity)
-    : velocity(velocity),
+    : sprite(texture),
+      velocity(velocity),
+      radius(0.f),
       scale(scale)
 {
     if (texture.getSize().x == 0)
@@ -17,8 +19,6 @@ Asteroid::Asteroid(float scale,
             std::cerr << "Failed to load assets/asteroid_asteroids.png\n";
         }
     }
-
-    sprite.setTexture(texture);
 
     sprite.setOrigin({
         static_cast<float>(texture.getSize().x) / 2.f,
@@ -32,7 +32,6 @@ Asteroid::Asteroid(float scale,
         scale * 2.f
     });
 
-    // Collision radius (half width * scale)
     radius =
         (static_cast<float>(texture.getSize().x) / 2.f) * scale;
 }
@@ -41,7 +40,6 @@ void Asteroid::update(float dt)
 {
     sprite.move(velocity * dt);
 
-    // Screen wrap
     sf::Vector2f pos = sprite.getPosition();
 
     if (pos.x < 0.f)

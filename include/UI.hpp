@@ -2,21 +2,22 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-
 #include "Constants.hpp"
 
 class UI
 {
 public:
-    UI() = default;
+    UI();
 
     bool loadFont(const std::string& path);
 
-    void draw(sf::RenderWindow& window,
-              int lives,
-              int score,
-              int waveNumber,
-              GameState state);
+    void draw(
+        sf::RenderWindow& window,
+        int lives,
+        int score,
+        int waveNumber,
+        GameState state
+    );
 
     void setWaveNumber(int waveNumber);
 

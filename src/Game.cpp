@@ -7,7 +7,7 @@ Game::Game()
     : window(
           sf::VideoMode::getDesktopMode(),
           "Asteroids Game",
-          sf::Style::Fullscreen),
+          sf::State::Fullscreen),
       state(GameState::PLAYING),
       score(0),
       lives(Constants::INITIAL_LIVES),
@@ -19,6 +19,8 @@ Game::Game()
 
     Constants::SCREEN_WIDTH = desktop.size.x;
     Constants::SCREEN_HEIGHT = desktop.size.y;
+
+    ship.resetPosition();
 
     ui.loadFont("assets/Creepster-Regular.ttf");
 

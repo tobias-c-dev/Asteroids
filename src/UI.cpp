@@ -2,6 +2,17 @@
 #include "Constants.hpp"
 #include <iostream>
 
+UI::UI()
+    : livesText(font),
+      scoreText(font),
+      wavesText(font),
+      gameOverText0(font),
+      gameOverText(font),
+      levelText(font),
+      pausedText(font)
+{
+}
+
 bool UI::loadFont(const std::string& path)
 {
     if (!font.openFromFile(path))
@@ -11,17 +22,14 @@ bool UI::loadFont(const std::string& path)
         return false;
     }
 
-    livesText.setFont(font);
     livesText.setFillColor(sf::Color::Red);
     livesText.setCharacterSize(50);
     livesText.setPosition({10.f, 10.f});
 
-    scoreText.setFont(font);
     scoreText.setFillColor(sf::Color::Green);
     scoreText.setCharacterSize(50);
     scoreText.setPosition({10.f, 70.f});
 
-    wavesText.setFont(font);
     wavesText.setFillColor(sf::Color::Cyan);
     wavesText.setCharacterSize(50);
     wavesText.setPosition({
@@ -29,7 +37,6 @@ bool UI::loadFont(const std::string& path)
         static_cast<float>(Constants::SCREEN_HEIGHT - 1050)
     });
 
-    levelText.setFont(font);
     levelText.setFillColor(sf::Color::Red);
     levelText.setCharacterSize(100);
     levelText.setPosition({
@@ -37,7 +44,6 @@ bool UI::loadFont(const std::string& path)
         static_cast<float>(Constants::SCREEN_HEIGHT) / 2.f
     });
 
-    gameOverText0.setFont(font);
     gameOverText0.setFillColor(sf::Color::Red);
     gameOverText0.setCharacterSize(200);
     gameOverText0.setString("GAME OVER!");
@@ -54,7 +60,6 @@ bool UI::loadFont(const std::string& path)
         static_cast<float>(Constants::SCREEN_HEIGHT) / 2.f - 30.f
     });
 
-    gameOverText.setFont(font);
     gameOverText.setFillColor(sf::Color::Magenta);
     gameOverText.setCharacterSize(70);
     gameOverText.setString("PRESS R TO RESTART\nPRESS Q TO QUIT");
@@ -71,7 +76,6 @@ bool UI::loadFont(const std::string& path)
         static_cast<float>(Constants::SCREEN_HEIGHT) / 2.f + 350.f
     });
 
-    pausedText.setFont(font);
     pausedText.setCharacterSize(80);
     pausedText.setFillColor(sf::Color::Magenta);
     pausedText.setString("PAUSED");
