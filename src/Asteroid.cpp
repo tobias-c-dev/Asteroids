@@ -20,6 +20,14 @@ Asteroid::Asteroid(float scale,
         }
     }
 
+    sprite.setTextureRect(sf::IntRect(
+        {0, 0},
+        {
+            static_cast<int>(texture.getSize().x),
+            static_cast<int>(texture.getSize().y)
+        }
+    ));
+
     sprite.setOrigin({
         static_cast<float>(texture.getSize().x) / 2.f,
         static_cast<float>(texture.getSize().y) / 2.f

@@ -368,6 +368,7 @@ void Game::resetGame()
 {
     score = 0;
     lives = Constants::INITIAL_LIVES;
+    waveNumber = 1;
 
     bullets.clear();
     asteroids.clear();
